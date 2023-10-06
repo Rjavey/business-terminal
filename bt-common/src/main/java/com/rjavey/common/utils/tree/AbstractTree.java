@@ -3,11 +3,10 @@ package com.rjavey.common.utils.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * 抽象树
- *
- * @author baiyan
- * @date 2020/11/13
+ * @author rjavey
  */
 public abstract class AbstractTree<T extends Treeable> implements Treeable<T> {
 

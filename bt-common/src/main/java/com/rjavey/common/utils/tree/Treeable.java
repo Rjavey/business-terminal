@@ -2,9 +2,9 @@ package com.rjavey.common.utils.tree;
 
 import java.util.List;
 
+
 /**
- * @author baiyan
- * @date 2020/11/13
+ * @author rjavey
  */
 public interface Treeable<T extends Treeable> {
 

@@ -9,13 +9,10 @@ import java.util.function.Supplier;
 
 import static java.util.stream.Collectors.toList;
 
+
 /**
  * java8函数式工具
- *
- * if/else等简单逻辑疯狂缩短代码
- *
- * @author baiyan
- * @date 2021/02/01
+ * @author rjavey
  */
 public final class JavaUtil {
 

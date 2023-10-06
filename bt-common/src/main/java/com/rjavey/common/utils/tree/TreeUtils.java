@@ -2,11 +2,10 @@ package com.rjavey.common.utils.tree;
 
 import java.util.*;
 
+
 /**
  * 树工具类
- *
- * @author baiyan
- * @date 2020/11/13
+ * @author rjavey
  */
 public class TreeUtils {
 
@@ -33,8 +32,7 @@ public class TreeUtils {
         }
         mapping.put(treeRoot.key(), treeRoot);
 
-        source.stream()
-                .forEach(i -> {
+        source.forEach(i -> {
                     O o = treeFactory.convert(i);
                     mapping.putIfAbsent(o.key(), o);
                 });

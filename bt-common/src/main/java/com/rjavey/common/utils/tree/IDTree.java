@@ -1,8 +1,8 @@
 package com.rjavey.common.utils.tree;
 
+
 /**
- * @author baiyan
- * @date 2020/11/13
+ * @author rjavey
  */
 public abstract class IDTree<T extends Treeable> extends AbstractTree<T> {
     @Override

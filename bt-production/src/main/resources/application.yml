@@ -1,0 +1,10 @@
+spring:
+  dataSource:
+    druid:
+      url: jdbc:mysql://192.168.31.253:3306/business_terminal_erp?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true&useSSL=false
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 1qazWSX
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml

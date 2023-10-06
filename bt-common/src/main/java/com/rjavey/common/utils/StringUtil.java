@@ -9,11 +9,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+
 /**
  * 字符串工具类
- *
- * @author baiyan
- * @date 2020/11/13
+ * @author rjavey
  */
 public class StringUtil extends StrUtil {
 

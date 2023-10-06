@@ -1,9 +1,14 @@
 package com.rjavey.production.controller;
 
+import com.rjavey.common.model.command.AddSupplier;
 import com.rjavey.common.result.Result;
+import com.rjavey.production.biz.SupplierBizService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
 
 /**
  * @author rjavey
@@ -13,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/supplier")
 public class SupplierController {
 
+    @Resource
+    private SupplierBizService bizService;
+
     @ApiOperation(value = "分页查询供应商", notes = "分页查询供应商")
     @GetMapping("/")
     public Result<?> get(){
@@ -21,8 +29,8 @@ public class SupplierController {
 
     @ApiOperation(value = "添加供应商", notes = "添加供应商")
     @PostMapping("/")
-    public Result<?> add(){
-        return Result.ok("todo");
+    public Result<?> add(@RequestBody @Valid AddSupplier addSupplier) {
+        return bizService.add(addSupplier);
     }
 
     @ApiOperation(value = "编辑供应商", notes = "编辑供应商")

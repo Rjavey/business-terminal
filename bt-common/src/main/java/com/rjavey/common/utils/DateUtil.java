@@ -134,8 +134,7 @@ public class DateUtil extends cn.hutool.core.date.DateUtil {
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
-        String dateStr = sdf.format(new Date(ms));
-        return dateStr;
+        return sdf.format(new Date(ms));
     }
 
     public static String formatTimeNow(String format) {
@@ -221,7 +220,7 @@ public class DateUtil extends cn.hutool.core.date.DateUtil {
     }
 
     public static String formatStr(String str) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             sb.append(formatDigit(str.charAt(i)));
         }

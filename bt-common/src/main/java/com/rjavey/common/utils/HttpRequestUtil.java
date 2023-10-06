@@ -23,7 +23,10 @@ public class HttpRequestUtil {
      */
     public static HttpServletRequest getRequest() {
         ServletRequestAttributes ra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = ra.getRequest();
+        HttpServletRequest request = null;
+        if (ra != null) {
+            request = ra.getRequest();
+        }
         return request;
     }
 
@@ -33,8 +36,7 @@ public class HttpRequestUtil {
      */
     public static HttpServletResponse getResponse() {
         ServletRequestAttributes ra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletResponse response = ra.getResponse();
-        return response;
+        return ra.getResponse();
     }
 
     /**
@@ -106,7 +108,7 @@ public class HttpRequestUtil {
      * @return
      */
     public static String getIpAddrFromProxyClient(String ip,HttpServletRequest request){
-        if (ip == null || ip.length() == 0 || "unknow".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || "unknow".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
         return ip;
@@ -118,7 +120,7 @@ public class HttpRequestUtil {
      * @return
      */
     public static String getIpAddrFromWLProxyClient(String ip,HttpServletRequest request){
-        if (ip == null || ip.length() == 0 || "unknow".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || "unknow".equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
         return ip;

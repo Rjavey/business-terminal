@@ -8,11 +8,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 /**
  * 集合工具类
- *
- * @author baiyan
- * @date 2020/11/13
+ * @author rjavey
  */
 public class CollectionUtils extends CollectionUtil {
 
@@ -20,18 +19,18 @@ public class CollectionUtils extends CollectionUtil {
      * 按数量切割成多个list
      */
     public static <T> List<List<T>> groupListByQuantity(List<T> list, int quantity) {
-        if (list == null || list.size() == 0) {
+        if (list == null || list.isEmpty()) {
             return new ArrayList<>();
         }
 
         if (quantity <= 0) {
-            new IllegalArgumentException("Wrong quantity.");
+            throw new IllegalArgumentException("Wrong quantity.");
         }
 
-        List<List<T>> wrapList = new ArrayList();
+        List<List<T>> wrapList = new ArrayList<>();
         int count = 0;
         while (count < list.size()) {
-            wrapList.add(new ArrayList<>(list.subList(count, (count + quantity) > list.size() ? list.size() : count + quantity)));
+            wrapList.add(new ArrayList<>(list.subList(count, Math.min((count + quantity), list.size()))));
             count += quantity;
         }
 
@@ -41,8 +40,7 @@ public class CollectionUtils extends CollectionUtil {
      * 交集
      */
     public static <T> List<T> setRetain(List<T> maskOne, List<T> maskTwo) {
-        Set<T> set = new HashSet<>();
-        set.addAll(maskOne);
+        Set<T> set = new HashSet<>(maskOne);
         set.retainAll(maskTwo);
         return new ArrayList<>(set);
     }
@@ -51,9 +49,8 @@ public class CollectionUtils extends CollectionUtil {
      * 差集
      */
     public static <T> List<T> setRemove(List<T> maskOne, List<T> maskTwo){
-        Set<T> set = new HashSet<>();
-        set.addAll(maskOne);
-        set.removeAll(maskTwo);
+        Set<T> set = new HashSet<>(maskOne);
+        maskTwo.forEach(set::remove);
         return new ArrayList<>(set);
     }
 

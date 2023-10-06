@@ -6,11 +6,10 @@ import com.rjavey.common.exception.ValidationException;
 import java.util.Collection;
 import java.util.Objects;
 
+
 /**
  * 校验工具类
- *
- * @author baiyan
- * @date 2020/11/13
+ * @author rjavey
  */
 public class ValidationUtil {
 
