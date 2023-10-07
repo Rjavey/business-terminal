@@ -1,6 +1,8 @@
 package com.rjavey.production.controller;
 
 import com.rjavey.common.model.command.AddSupplier;
+import com.rjavey.common.model.vo.producton.SupplierVo;
+import com.rjavey.common.result.PageResult;
 import com.rjavey.common.result.Result;
 import com.rjavey.production.biz.SupplierBizService;
 import io.swagger.annotations.Api;
@@ -13,7 +15,7 @@ import javax.validation.Valid;
 /**
  * @author rjavey
  */
-@Api("供应商管理")
+@Api(tags = "供应商管理")
 @RestController
 @RequestMapping("/supplier")
 public class SupplierController {
@@ -23,20 +25,20 @@ public class SupplierController {
 
     @ApiOperation(value = "分页查询供应商", notes = "分页查询供应商")
     @GetMapping("/")
-    public Result<?> get(){
-        return Result.ok("todo");
+    public PageResult<SupplierVo> get(){
+        return PageResult.ok(null, null);
     }
 
     @ApiOperation(value = "添加供应商", notes = "添加供应商")
     @PostMapping("/")
-    public Result<?> add(@RequestBody @Valid AddSupplier addSupplier) {
+    public Result<SupplierVo> add(@RequestBody @Valid AddSupplier addSupplier) {
         return bizService.add(addSupplier);
     }
 
     @ApiOperation(value = "编辑供应商", notes = "编辑供应商")
     @PutMapping("/")
-    public Result<?> edit(){
-        return Result.ok("todo");
+    public Result<SupplierVo> edit(){
+        return Result.ok(null);
     }
 
     @ApiOperation(value = "删除供应商", notes = "删除供应商")
