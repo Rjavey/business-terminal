@@ -1,15 +1,12 @@
 package com.rjavey.production.controller;
 
 import com.rjavey.common.model.command.AddProduct;
-import com.rjavey.common.model.command.AddSupplier;
+import com.rjavey.common.model.command.UpdateProduct;
 import com.rjavey.common.model.query.production.ProductQuery;
-import com.rjavey.common.model.query.production.SupplierQuery;
 import com.rjavey.common.model.vo.production.ProductVo;
-import com.rjavey.common.model.vo.production.SupplierVo;
 import com.rjavey.common.result.PageResult;
 import com.rjavey.common.result.Result;
 import com.rjavey.production.biz.ProductBizService;
-import com.rjavey.production.biz.SupplierBizService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +39,7 @@ public class ProductController {
 
     @ApiOperation(value = "编辑物料", notes = "编辑物料")
     @PutMapping("/")
-    public Result<ProductVo> edit(@RequestBody @Valid AddProduct data){
+    public Result<ProductVo> edit(@RequestBody @Valid UpdateProduct data) {
         return bizService.edit(data);
     }
 

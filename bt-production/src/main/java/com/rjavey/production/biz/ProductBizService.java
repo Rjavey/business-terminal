@@ -1,7 +1,9 @@
 package com.rjavey.production.biz;
 
 import com.rjavey.common.model.command.AddProduct;
+import com.rjavey.common.model.command.UpdateProduct;
 import com.rjavey.common.model.query.production.ProductQuery;
+import com.rjavey.common.model.vo.production.ProductDetailVo;
 import com.rjavey.common.model.vo.production.ProductVo;
 import com.rjavey.common.result.PageResult;
 import com.rjavey.common.result.Result;
@@ -31,7 +33,7 @@ public interface ProductBizService {
      * @param data
      * @return
      */
-    Result<ProductVo> edit(AddProduct data);
+    Result<ProductVo> edit(UpdateProduct data);
 
     /**
      * 删除物料
@@ -39,4 +41,12 @@ public interface ProductBizService {
      * @return
      */
     Result<?> remove(Long productId);
+
+    /**
+     * 查询物料产品详情
+     *
+     * @param productId
+     * @return
+     */
+    Result<ProductDetailVo> detail(Long productId);
 }

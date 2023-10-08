@@ -1,17 +1,20 @@
-package com.rjavey.common.model.command;
+package com.rjavey.common.model.vo.production;
 
+
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
 
 /**
+ * 物料产品表
+ *
  * @author rjavey
  */
 @Data
-public class AddProduct {
-
-    private Long id;
+@ApiModel("物料产品信息vo")
+public class ProductDetailVo {
 
     /**
      * 成品半成品名称
@@ -61,13 +64,6 @@ public class AddProduct {
     @ApiModelProperty(value = "成品来源", notes = "outsourcing 外购/外协 self 自制")
     private String productFrom;
 
-    @ApiModelProperty("可提供供应商ID")
-    private List<Long> supplierIds;
-
-    @ApiModelProperty("可生产产品id")
-    private List<Long> parentIds;
-
-    @ApiModelProperty("需提供产品id")
-    private List<Long> childIds;
-
+    @ApiModelProperty("可提供供应商")
+    private List<SupplierVo> suppliers;
 }

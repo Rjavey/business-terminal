@@ -3,6 +3,7 @@ package com.rjavey.production.biz;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.rjavey.common.model.command.AddSupplier;
+import com.rjavey.common.model.command.UpdateSupplier;
 import com.rjavey.common.model.po.production.Product;
 import com.rjavey.common.model.po.production.Supplier;
 import com.rjavey.common.model.query.production.SupplierQuery;
@@ -15,10 +16,10 @@ import com.rjavey.common.utils.SnowflakeUtil;
 import com.rjavey.common.utils.StringUtil;
 import com.rjavey.production.service.ProductService;
 import com.rjavey.production.service.SupplierService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ import java.util.List;
 @Service
 public class SupplierBizImpl implements SupplierBizService {
 
-    @Autowired
+    @Resource
     private SupplierService supplierService;
 
     @Resource
@@ -38,7 +39,11 @@ public class SupplierBizImpl implements SupplierBizService {
 
         Supplier data = BeanUtil.copyProperties(addSupplier, Supplier.class);
         // todo 注入用户租户相关信息
-        data.setTenantId(SnowflakeUtil.getInstance().nextId());
+        data.setId(SnowflakeUtil.getInstance().nextId());
+        data.setCreateAt(1L);
+        data.setUpdateAt(1L);
+        data.setGmtCreate(LocalDateTime.now());
+        data.setGmtUpdate(LocalDateTime.now());
         supplierService.save(data);
         SupplierVo vo = BeanUtil.copyProperties(data, SupplierVo.class);
         return Result.success(vo);
@@ -62,22 +67,26 @@ public class SupplierBizImpl implements SupplierBizService {
 
 
     @Override
-    public Result<SupplierVo> edit(AddSupplier addSupplier) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'edit'");
+    public Result<SupplierVo> edit(UpdateSupplier data) {
+        var supplier = getTenantSupplier(data.getId());
+        if (supplier == null) {
+            return Result.error("");
+        }
+
+        BeanUtil.copyProperties(data, supplier);
+        supplierService.updateById(supplier);
+        return Result.ok();
     }
 
     @Override
     public Result<?> remove(Long supplierId) {
 
-        Supplier supplier = supplierService.getOne(new LambdaQueryWrapper<Supplier>()
-                .eq(Supplier::getId,supplierId)
-                .eq(Supplier::getTenantId,1L));
+        var supplier = getTenantSupplier(supplierId);
         if (supplier == null){
             return Result.error("");
         }
         supplierService.removeById(supplierId);
-        return null;
+        return Result.ok();
     }
 
     @Override
@@ -96,5 +105,17 @@ public class SupplierBizImpl implements SupplierBizService {
         detail.setProducts(BeanUtil.copyToList(products, ProductVo.class));
 
         return Result.success(detail);
+    }
+
+    /**
+     * 根据id查询租户供应商
+     *
+     * @param supplierId
+     * @return
+     */
+    private Supplier getTenantSupplier(Long supplierId) {
+        return supplierService.getOne(new LambdaQueryWrapper<Supplier>()
+                .eq(Supplier::getId, supplierId)
+                .eq(Supplier::getTenantId, 1L));
     }
 }

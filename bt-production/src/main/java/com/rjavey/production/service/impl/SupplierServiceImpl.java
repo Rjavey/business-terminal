@@ -6,6 +6,8 @@ import com.rjavey.production.dao.SupplierMapper;
 import com.rjavey.production.service.SupplierService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author rjavey
  * @description 针对表【bt_erp_supplier(供应商表)】的数据库操作Service实现
@@ -15,6 +17,10 @@ import org.springframework.stereotype.Service;
 public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier>
         implements SupplierService {
 
+    @Override
+    public List<Supplier> supplierDetailByProduct(Long productId) {
+        return null;
+    }
 }
 
 
