@@ -1,27 +1,19 @@
-package com.rjavey.common.model.po.production;
+package com.rjavey.common.model.vo.production;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.rjavey.common.model.po.BaseEntity;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
 
 /**
- * 产品表
+ * 物料产品表
  *
  * @author rjavey
- * @TableName bt_erp_product
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-@ApiModel("产品表实体类")
-@TableName("bt_erp_product")
-public class Product extends BaseEntity implements Serializable {
+@ApiModel("供应商信息vo")
+public class ProductVo {
 
-    private static final long serialVersionUID = 1L;
     /**
      * 成品半成品名称
      */
@@ -69,20 +61,4 @@ public class Product extends BaseEntity implements Serializable {
      */
     @ApiModelProperty(value = "成品来源", notes = "outsourcing 外购/外协 self 自制")
     private String productFrom;
-    /**
-     * 所属租户
-     */
-    @ApiModelProperty("所属租户")
-    private Long tenantId;
-    /**
-     *
-     */
-    @ApiModelProperty("创建人")
-    private Long createAt;
-    /**
-     *
-     */
-    @ApiModelProperty("更新人")
-    private Long updateAt;
-
 }

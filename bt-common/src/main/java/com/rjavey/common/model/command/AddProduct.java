@@ -1,27 +1,19 @@
-package com.rjavey.common.model.po.production;
+package com.rjavey.common.model.command;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.rjavey.common.model.po.BaseEntity;
-import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
- * 产品表
- *
  * @author rjavey
- * @TableName bt_erp_product
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-@ApiModel("产品表实体类")
-@TableName("bt_erp_product")
-public class Product extends BaseEntity implements Serializable {
+public class AddProduct {
 
-    private static final long serialVersionUID = 1L;
     /**
      * 成品半成品名称
      */
@@ -69,20 +61,14 @@ public class Product extends BaseEntity implements Serializable {
      */
     @ApiModelProperty(value = "成品来源", notes = "outsourcing 外购/外协 self 自制")
     private String productFrom;
-    /**
-     * 所属租户
-     */
-    @ApiModelProperty("所属租户")
-    private Long tenantId;
-    /**
-     *
-     */
-    @ApiModelProperty("创建人")
-    private Long createAt;
-    /**
-     *
-     */
-    @ApiModelProperty("更新人")
-    private Long updateAt;
+
+    @ApiModelProperty("可提供供应商ID")
+    private List<Long> supplierIds;
+
+    @ApiModelProperty("可生产产品id")
+    private List<Long> parentIds;
+
+    @ApiModelProperty("需提供产品id")
+    private List<Long> childIds;
 
 }

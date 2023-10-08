@@ -1,9 +1,11 @@
-package com.rjavey.common.model.vo.producton;
+package com.rjavey.common.model.vo.production;
 
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * 供应商表
@@ -15,6 +17,7 @@ import lombok.Data;
 @ApiModel("供应商信息vo")
 public class SupplierVo  {
 
+    @ApiModelProperty("ID")
     private Long id;
 
     /**
@@ -68,14 +71,5 @@ public class SupplierVo  {
      */
     @ApiModelProperty("区/县")
     private Long area;
-    /**
-     * 创建人id
-     */
-    @ApiModelProperty("创建人id")
-    private Long createAt;
-    /**
-     * 更新人id
-     */
-    @ApiModelProperty("更新人id")
-    private Long updateAt;
+
 }

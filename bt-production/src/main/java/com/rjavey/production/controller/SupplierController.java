@@ -1,7 +1,9 @@
 package com.rjavey.production.controller;
 
 import com.rjavey.common.model.command.AddSupplier;
-import com.rjavey.common.model.vo.producton.SupplierVo;
+import com.rjavey.common.model.query.production.SupplierQuery;
+import com.rjavey.common.model.vo.production.SupplierDetailVo;
+import com.rjavey.common.model.vo.production.SupplierVo;
 import com.rjavey.common.result.PageResult;
 import com.rjavey.common.result.Result;
 import com.rjavey.production.biz.SupplierBizService;
@@ -24,9 +26,9 @@ public class SupplierController {
     private SupplierBizService bizService;
 
     @ApiOperation(value = "分页查询供应商", notes = "分页查询供应商")
-    @GetMapping("/")
-    public PageResult<SupplierVo> get(){
-        return PageResult.ok(null, null);
+    @PostMapping("/page")
+    public PageResult<SupplierVo> get(@RequestBody SupplierQuery query){
+        return bizService.page(query);
     }
 
     @ApiOperation(value = "添加供应商", notes = "添加供应商")
@@ -37,13 +39,19 @@ public class SupplierController {
 
     @ApiOperation(value = "编辑供应商", notes = "编辑供应商")
     @PutMapping("/")
-    public Result<SupplierVo> edit(){
-        return Result.ok(null);
+    public Result<SupplierVo> edit(@RequestBody @Valid AddSupplier addSupplier){
+        return bizService.edit(addSupplier);
     }
 
     @ApiOperation(value = "删除供应商", notes = "删除供应商")
-    @DeleteMapping("/")
-    public Result<?> remove(){
-        return Result.ok("todo");
+    @DeleteMapping("/{id}")
+    public Result<?> remove(@PathVariable Long id){
+        return bizService.remove(id);
+    }
+
+    @ApiOperation(value = "查询供应商详情", notes = "查询供应商详情，包括供应商提供物料信息")
+    @GetMapping("/{id}")
+    public Result<SupplierDetailVo> detail(){
+        return Result.error("todo");
     }
 }
