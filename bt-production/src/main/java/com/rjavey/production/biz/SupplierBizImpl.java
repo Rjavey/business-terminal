@@ -14,6 +14,7 @@ import com.rjavey.common.result.PageResult;
 import com.rjavey.common.result.Result;
 import com.rjavey.common.utils.SnowflakeUtil;
 import com.rjavey.common.utils.StringUtil;
+import com.rjavey.common.utils.ThreadIdentityUtil;
 import com.rjavey.production.service.ProductService;
 import com.rjavey.production.service.SupplierService;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,9 @@ public class SupplierBizImpl implements SupplierBizService {
         Supplier data = BeanUtil.copyProperties(addSupplier, Supplier.class);
         // todo 注入用户租户相关信息
         data.setId(SnowflakeUtil.getInstance().nextId());
-        data.setCreateAt(1L);
-        data.setUpdateAt(1L);
+        data.setTenantId(ThreadIdentityUtil.get().getTenantId());
+        data.setCreateAt(ThreadIdentityUtil.get().getId());
+        data.setUpdateAt(ThreadIdentityUtil.get().getId());
         data.setGmtCreate(LocalDateTime.now());
         data.setGmtUpdate(LocalDateTime.now());
         supplierService.save(data);
@@ -93,9 +95,7 @@ public class SupplierBizImpl implements SupplierBizService {
     public Result<SupplierDetailVo> detail(Long supplierId) {
 
         // 查询供应商
-        Supplier supplier = supplierService.getOne(new LambdaQueryWrapper<Supplier>()
-                .eq(Supplier::getId,supplierId)
-                .eq(Supplier::getTenantId,1L));
+        Supplier supplier = getTenantSupplier(supplierId);
         if (supplier == null){
             return Result.error("");
         }
@@ -116,6 +116,6 @@ public class SupplierBizImpl implements SupplierBizService {
     private Supplier getTenantSupplier(Long supplierId) {
         return supplierService.getOne(new LambdaQueryWrapper<Supplier>()
                 .eq(Supplier::getId, supplierId)
-                .eq(Supplier::getTenantId, 1L));
+                .eq(Supplier::getTenantId, ThreadIdentityUtil.get().getTenantId()));
     }
 }

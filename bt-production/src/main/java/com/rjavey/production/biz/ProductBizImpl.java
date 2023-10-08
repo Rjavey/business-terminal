@@ -6,14 +6,18 @@ import com.rjavey.common.model.command.AddProduct;
 import com.rjavey.common.model.command.UpdateProduct;
 import com.rjavey.common.model.po.production.Product;
 import com.rjavey.common.model.po.production.Supplier;
+import com.rjavey.common.model.po.production.SupplierProduct;
 import com.rjavey.common.model.query.production.ProductQuery;
 import com.rjavey.common.model.vo.production.ProductDetailVo;
 import com.rjavey.common.model.vo.production.ProductVo;
 import com.rjavey.common.model.vo.production.SupplierVo;
 import com.rjavey.common.result.PageResult;
 import com.rjavey.common.result.Result;
+import com.rjavey.common.utils.CollectionUtils;
 import com.rjavey.common.utils.SnowflakeUtil;
+import com.rjavey.common.utils.ThreadIdentityUtil;
 import com.rjavey.production.service.ProductService;
+import com.rjavey.production.service.SupplierProductService;
 import com.rjavey.production.service.SupplierService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,6 +40,9 @@ public class ProductBizImpl implements ProductBizService{
     @Resource
     private SupplierService supplierService;
 
+    @Resource
+    private SupplierProductService supplierProductService;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result<ProductVo> add(AddProduct data) {
@@ -43,17 +50,35 @@ public class ProductBizImpl implements ProductBizService{
         //
         Product product = BeanUtil.copyProperties(data,Product.class);
         product.setId(SnowflakeUtil.getInstance().nextId());
-        product.setTenantId(1L);
-        product.setCreateAt(1L);
-        product.setUpdateAt(1L);
+        product.setTenantId(ThreadIdentityUtil.get().getTenantId());
+        product.setCreateAt(ThreadIdentityUtil.get().getId());
+        product.setUpdateAt(ThreadIdentityUtil.get().getId());
         product.setGmtCreate(LocalDateTime.now());
         product.setGmtUpdate(LocalDateTime.now());
         productService.save(product);
 
-        // 配置供应商信息 todo
+        // 配置供应商信息
+        if (!CollectionUtils.isEmpty(data.getSupplierIds())) {
+            data.getSupplierIds().parallelStream().forEach(s -> {
+                SupplierProduct sp = new SupplierProduct();
+                sp.setId(SnowflakeUtil.getInstance().nextId());
+                sp.setSupplierId(s);
+                sp.setProductId(product.getId());
+                supplierProductService.save(sp);
+            });
+        }
+
 
         // 配置父级子级信息 todo
-        return null;
+        if (!CollectionUtils.isEmpty(data.getParentIds())) {
+
+        }
+
+        if (!CollectionUtils.isEmpty(data.getChildIds())) {
+
+        }
+
+        return Result.success(BeanUtil.copyProperties(product, ProductVo.class));
     }
 
     @Override
@@ -99,8 +124,7 @@ public class ProductBizImpl implements ProductBizService{
 
     private Product getTenantProduct(Long productId) {
         return productService.getOne(new LambdaQueryWrapper<Product>()
-                // todo 获取用户tenantId
-                .eq(Product::getTenantId, 1L)
+                .eq(Product::getTenantId, ThreadIdentityUtil.get().getTenantId())
                 .eq(Product::getId, productId));
     }
 }
