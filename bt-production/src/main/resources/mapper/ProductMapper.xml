@@ -4,4 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rjavey.production.dao.ProductMapper">
 
+    <select id="getParentProducts" resultType="com.rjavey.common.model.po.production.Product">
+        select * from bt_erp_product_relation pr
+        left join bt_erp_product p on p.id = pr.parent_id
+        where pr.child_id = #{productId}
+    </select>
+    <select id="getChildProducts" resultType="com.rjavey.common.model.po.production.Product">
+        select * from bt_erp_product_relation pr
+        left join bt_erp_product p on p.id = pr.child_id
+        where pr.parent_id = #{productId}
+    </select>
 </mapper>

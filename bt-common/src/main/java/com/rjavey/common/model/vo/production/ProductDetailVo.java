@@ -66,4 +66,10 @@ public class ProductDetailVo {
 
     @ApiModelProperty("可提供供应商")
     private List<SupplierVo> suppliers;
+
+    @ApiModelProperty("上级物料产品")
+    private List<ProductVo> parentProducts;
+
+    @ApiModelProperty("下级物料产品")
+    private List<ProductVo> childProducts;
 }

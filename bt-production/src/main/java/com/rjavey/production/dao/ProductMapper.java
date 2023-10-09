@@ -2,7 +2,8 @@ package com.rjavey.production.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.rjavey.common.model.po.production.Product;
-import com.rjavey.common.model.po.production.Supplier;
+
+import java.util.List;
 
 /**
  * @author rjavey
@@ -11,6 +12,11 @@ import com.rjavey.common.model.po.production.Supplier;
  * @Entity com/rjavye/common/model/po/production.domain.Supplier
  */
 public interface ProductMapper extends BaseMapper<Product> {
+
+    List<Product> getParentProducts(Long productId);
+
+
+    List<Product> getChildProducts(Long productId);
 
 }
 

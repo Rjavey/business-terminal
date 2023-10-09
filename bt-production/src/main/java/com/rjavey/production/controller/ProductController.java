@@ -1,8 +1,10 @@
 package com.rjavey.production.controller;
 
 import com.rjavey.common.model.command.AddProduct;
+import com.rjavey.common.model.command.AddProductRelation;
 import com.rjavey.common.model.command.UpdateProduct;
 import com.rjavey.common.model.query.production.ProductQuery;
+import com.rjavey.common.model.vo.production.ProductDetailVo;
 import com.rjavey.common.model.vo.production.ProductVo;
 import com.rjavey.common.result.PageResult;
 import com.rjavey.common.result.Result;
@@ -51,8 +53,20 @@ public class ProductController {
 
     @ApiOperation(value = "查询物料详情", notes = "查询物料详情，包括物料上下级关系及可提供供应商")
     @GetMapping("/{id}")
-    public Result<ProductVo> detail(){
-        return Result.error("todo");
+    public Result<ProductDetailVo> detail(@PathVariable Long id) {
+        return bizService.detail(id);
+    }
+
+    @PutMapping("/set_relation")
+    @ApiOperation(value = "绑定物料产品的上下级关系", notes = "绑定物料产品的上下级关系")
+    public Result<?> setProductRelation(@RequestBody @Valid AddProductRelation relation) {
+        return bizService.setProductRelation(relation);
+    }
+
+    @DeleteMapping("/remove_relation")
+    @ApiOperation(value = "移除物料产品关系")
+    public Result<?> removeProductRelation(@RequestBody @Valid AddProductRelation relation) {
+        return bizService.removeProductRelation(relation);
     }
 
 

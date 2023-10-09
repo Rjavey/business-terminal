@@ -2,12 +2,8 @@ package com.rjavey.production.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rjavey.common.model.po.production.Product;
-import com.rjavey.common.model.po.production.Supplier;
-import com.rjavey.common.model.vo.production.ProductVo;
 import com.rjavey.production.dao.ProductMapper;
-import com.rjavey.production.dao.SupplierMapper;
 import com.rjavey.production.service.ProductService;
-import com.rjavey.production.service.SupplierService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +20,16 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product>
     @Override
     public List<Product> productDetailBySupplier(Long supplierId) {
         return null;
+    }
+
+    @Override
+    public List<Product> getParentProduct(Long productId) {
+        return baseMapper.getParentProducts(productId);
+    }
+
+    @Override
+    public List<Product> getChildProduct(Long productId) {
+        return baseMapper.getChildProducts(productId);
     }
 }
 

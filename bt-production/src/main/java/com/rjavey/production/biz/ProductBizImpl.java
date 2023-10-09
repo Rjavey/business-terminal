@@ -3,8 +3,10 @@ package com.rjavey.production.biz;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.rjavey.common.model.command.AddProduct;
+import com.rjavey.common.model.command.AddProductRelation;
 import com.rjavey.common.model.command.UpdateProduct;
 import com.rjavey.common.model.po.production.Product;
+import com.rjavey.common.model.po.production.ProductRelation;
 import com.rjavey.common.model.po.production.Supplier;
 import com.rjavey.common.model.po.production.SupplierProduct;
 import com.rjavey.common.model.query.production.ProductQuery;
@@ -16,6 +18,7 @@ import com.rjavey.common.result.Result;
 import com.rjavey.common.utils.CollectionUtils;
 import com.rjavey.common.utils.SnowflakeUtil;
 import com.rjavey.common.utils.ThreadIdentityUtil;
+import com.rjavey.production.service.ProductRelationService;
 import com.rjavey.production.service.ProductService;
 import com.rjavey.production.service.SupplierProductService;
 import com.rjavey.production.service.SupplierService;
@@ -42,6 +45,9 @@ public class ProductBizImpl implements ProductBizService{
 
     @Resource
     private SupplierProductService supplierProductService;
+
+    @Resource
+    private ProductRelationService productRelationService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -119,7 +125,37 @@ public class ProductBizImpl implements ProductBizService{
         List<Supplier> supplierList = supplierService.supplierDetailByProduct(productId);
         detail.setSuppliers(BeanUtil.copyToList(supplierList, SupplierVo.class));
 
+        // 查询上下级物料
+        var parents = productService.getParentProduct(productId);
+        var childs = productService.getChildProduct(productId);
+        detail.setParentProducts(BeanUtil.copyToList(parents, ProductVo.class));
+        detail.setChildProducts(BeanUtil.copyToList(childs, ProductVo.class));
         return Result.success(detail);
+    }
+
+    @Override
+    public Result<?> setProductRelation(AddProductRelation relation) {
+        Product parent = getTenantProduct(relation.getParentId());
+        Product child = getTenantProduct(relation.getChildId());
+        if (parent != null && child != null) {
+            productRelationService.save(BeanUtil.copyProperties(relation, ProductRelation.class));
+            return Result.ok();
+        }
+
+        return Result.error("");
+    }
+
+    @Override
+    public Result<?> removeProductRelation(AddProductRelation relation) {
+        Product parent = getTenantProduct(relation.getParentId());
+        Product child = getTenantProduct(relation.getChildId());
+        if (parent != null && child != null) {
+            productRelationService.remove(new LambdaQueryWrapper<ProductRelation>()
+                    .eq(ProductRelation::getParentId, relation.getParentId())
+                    .eq(ProductRelation::getChildId, relation.getChildId()));
+            return Result.ok();
+        }
+        return Result.error("");
     }
 
     private Product getTenantProduct(Long productId) {

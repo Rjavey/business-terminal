@@ -3,8 +3,6 @@ package com.rjavey.production.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rjavey.common.model.po.production.Product;
-import com.rjavey.common.model.po.production.Supplier;
-import com.rjavey.common.model.vo.production.ProductVo;
 
 import java.util.List;
 
@@ -21,6 +19,10 @@ public interface ProductService extends IService<Product> {
      * @return
      */
     List<Product> productDetailBySupplier(Long supplierId);
+
+    List<Product> getParentProduct(Long productId);
+
+    List<Product> getChildProduct(Long productId);
 
 
 }
