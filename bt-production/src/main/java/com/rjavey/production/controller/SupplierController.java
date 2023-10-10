@@ -55,4 +55,6 @@ public class SupplierController {
     public Result<SupplierDetailVo> detail(@PathVariable Long id) {
         return bizService.detail(id);
     }
+
+
 }
