@@ -85,4 +85,6 @@ public class Product extends BaseEntity implements Serializable {
     @ApiModelProperty("更新人")
     private Long updateAt;
 
+    @ApiModelProperty("物料状态")
+    private String status;
 }

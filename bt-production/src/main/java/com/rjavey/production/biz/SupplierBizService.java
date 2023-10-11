@@ -8,6 +8,8 @@ import com.rjavey.common.model.vo.production.SupplierVo;
 import com.rjavey.common.result.PageResult;
 import com.rjavey.common.result.Result;
 
+import java.util.List;
+
 /**
  * @author rjavey
  */
@@ -36,10 +38,10 @@ public interface SupplierBizService {
 
     /**
      * 删除供应商数据
-     * @param supplierId 供应商id
+     * @param supplierIds 供应商id
      * @return
      */
-    Result<?> remove(Long supplierId);
+    Result<?> remove(List<Long> supplierIds);
 
     /**
      * 获取供应商详情

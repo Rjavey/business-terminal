@@ -2,6 +2,7 @@ package com.rjavey.production.biz;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.rjavey.common.exception.ServiceException;
 import com.rjavey.common.model.command.AddSupplier;
 import com.rjavey.common.model.command.UpdateSupplier;
 import com.rjavey.common.model.po.production.Product;
@@ -18,6 +19,7 @@ import com.rjavey.common.utils.ThreadIdentityUtil;
 import com.rjavey.production.service.ProductService;
 import com.rjavey.production.service.SupplierService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -81,13 +83,18 @@ public class SupplierBizImpl implements SupplierBizService {
     }
 
     @Override
-    public Result<?> remove(Long supplierId) {
+    @Transactional(rollbackFor = Exception.class)
+    public Result<?> remove(List<Long> supplierIds) {
 
-        var supplier = getTenantSupplier(supplierId);
-        if (supplier == null){
-            return Result.error("");
-        }
-        supplierService.removeById(supplierId);
+        supplierIds.parallelStream().forEachOrdered(supplierId -> {
+            var supplier = getTenantSupplier(supplierId);
+            if (supplier == null) {
+                throw new ServiceException("参数错误");
+            }
+            supplier.setStatus("delete");
+            supplierService.updateById(supplier);
+        });
+
         return Result.ok();
     }
 

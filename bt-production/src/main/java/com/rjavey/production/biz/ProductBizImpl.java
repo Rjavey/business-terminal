@@ -2,6 +2,7 @@ package com.rjavey.production.biz;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.rjavey.common.exception.ServiceException;
 import com.rjavey.common.model.command.AddProduct;
 import com.rjavey.common.model.command.AddProductRelation;
 import com.rjavey.common.model.command.UpdateProduct;
@@ -104,12 +105,16 @@ public class ProductBizImpl implements ProductBizService{
     }
 
     @Override
-    public Result<?> remove(Long productId) {
-        var product = getTenantProduct(productId);
-        if (product == null) {
-            return Result.error("");
-        }
-        productService.removeById(productId);
+    public Result<?> remove(List<Long> productIds) {
+        productIds.parallelStream().forEachOrdered(productId -> {
+            var product = getTenantProduct(productId);
+            if (product == null) {
+                throw new ServiceException("参数错误");
+            }
+            product.setStatus("delete");
+            productService.updateById(product);
+        });
+
         return Result.ok();
     }
 

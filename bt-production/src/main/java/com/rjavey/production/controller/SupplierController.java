@@ -1,6 +1,7 @@
 package com.rjavey.production.controller;
 
 import com.rjavey.common.model.command.AddSupplier;
+import com.rjavey.common.model.command.DeleteIds;
 import com.rjavey.common.model.command.UpdateSupplier;
 import com.rjavey.common.model.query.production.SupplierQuery;
 import com.rjavey.common.model.vo.production.SupplierDetailVo;
@@ -46,8 +47,8 @@ public class SupplierController {
 
     @ApiOperation(value = "删除供应商", notes = "删除供应商")
     @DeleteMapping("/{id}")
-    public Result<?> remove(@PathVariable Long id){
-        return bizService.remove(id);
+    public Result<?> remove(@RequestBody @Valid DeleteIds ids) {
+        return bizService.remove(ids.getIds());
     }
 
     @ApiOperation(value = "查询供应商详情", notes = "查询供应商详情，包括供应商提供物料信息")

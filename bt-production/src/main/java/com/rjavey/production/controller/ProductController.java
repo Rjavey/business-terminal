@@ -2,6 +2,7 @@ package com.rjavey.production.controller;
 
 import com.rjavey.common.model.command.AddProduct;
 import com.rjavey.common.model.command.AddProductRelation;
+import com.rjavey.common.model.command.DeleteIds;
 import com.rjavey.common.model.command.UpdateProduct;
 import com.rjavey.common.model.query.production.ProductQuery;
 import com.rjavey.common.model.vo.production.ProductDetailVo;
@@ -47,8 +48,8 @@ public class ProductController {
 
     @ApiOperation(value = "删除物料", notes = "删除物料")
     @DeleteMapping("/{id}")
-    public Result<?> remove(@PathVariable Long id){
-        return bizService.remove(id);
+    public Result<?> remove(@RequestBody @Valid DeleteIds ids) {
+        return bizService.remove(ids.getIds());
     }
 
     @ApiOperation(value = "查询物料详情", notes = "查询物料详情，包括物料上下级关系及可提供供应商")
