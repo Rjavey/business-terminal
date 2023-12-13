@@ -72,7 +72,7 @@ public class SupplierBizImpl implements SupplierBizService {
 
     @Override
     public Result<SupplierVo> edit(UpdateSupplier data) {
-        var supplier = getTenantSupplier(data.getId());
+        Supplier supplier = getTenantSupplier(data.getId());
         if (supplier == null) {
             return Result.error("");
         }
@@ -87,7 +87,7 @@ public class SupplierBizImpl implements SupplierBizService {
     public Result<?> remove(List<Long> supplierIds) {
 
         supplierIds.parallelStream().forEachOrdered(supplierId -> {
-            var supplier = getTenantSupplier(supplierId);
+            Supplier supplier = getTenantSupplier(supplierId);
             if (supplier == null) {
                 throw new ServiceException("参数错误");
             }

@@ -95,7 +95,7 @@ public class ProductBizImpl implements ProductBizService{
 
     @Override
     public Result<ProductVo> edit(UpdateProduct data) {
-        var product = getTenantProduct(data.getId());
+        Product product = getTenantProduct(data.getId());
         if (product == null) {
             return Result.error("");
         }
@@ -107,7 +107,7 @@ public class ProductBizImpl implements ProductBizService{
     @Override
     public Result<?> remove(List<Long> productIds) {
         productIds.parallelStream().forEachOrdered(productId -> {
-            var product = getTenantProduct(productId);
+            Product product = getTenantProduct(productId);
             if (product == null) {
                 throw new ServiceException("参数错误");
             }
@@ -120,19 +120,19 @@ public class ProductBizImpl implements ProductBizService{
 
     @Override
     public Result<ProductDetailVo> detail(Long productId) {
-        var product = getTenantProduct(productId);
+        Product product = getTenantProduct(productId);
         if (product == null) {
             return Result.error("");
         }
 
-        var detail = BeanUtil.copyProperties(product, ProductDetailVo.class);
+        ProductDetailVo detail = BeanUtil.copyProperties(product, ProductDetailVo.class);
 
         List<Supplier> supplierList = supplierService.supplierDetailByProduct(productId);
         detail.setSuppliers(BeanUtil.copyToList(supplierList, SupplierVo.class));
 
         // 查询上下级物料
-        var parents = productService.getParentProduct(productId);
-        var childs = productService.getChildProduct(productId);
+        List<Product> parents = productService.getParentProduct(productId);
+        List<Product> childs = productService.getChildProduct(productId);
         detail.setParentProducts(BeanUtil.copyToList(parents, ProductVo.class));
         detail.setChildProducts(BeanUtil.copyToList(childs, ProductVo.class));
         return Result.success(detail);

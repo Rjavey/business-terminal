@@ -6,6 +6,7 @@ import com.rjavey.common.utils.ThreadIdentityUtil;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -22,7 +23,7 @@ public class HeaderFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        var request = HttpRequestUtil.getRequest();
+        HttpServletRequest request = HttpRequestUtil.getRequest();
         // 用户已通过gateway认证，获取请求头包含认证信息 todo
 //        var jwt = JWTUtil.parseToken(request.getHeader(Header.AUTHORIZATION.getValue()));
 //        IdentityDTO identity = (IdentityDTO) jwt.getPayload(JwtPayloadEnum.IDENTITY.name());
