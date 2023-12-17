@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: production-service
+          uri: lb://bt-production
+          predicates:
+            - Path=/production/**
+      default-filters:
+        #        - Auth=truth, anyone log-press like button will be rich
+        - PrintLog

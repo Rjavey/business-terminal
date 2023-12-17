@@ -1,0 +1,21 @@
+server:
+  port: 10003
+spring:
+  application:
+    name: bt-user
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: ${nacos-server-addr}
+      config:
+        group: DEFAULT_GROUP
+        namespace: 2807b372-2965-4f41-80bb-3f73f6908f2a
+        file-extension: yaml
+        shared-configs:
+          - dataId: shared-swagger.yaml
+      discovery:
+        server-addr: ${nacos-server-addr}
+        group: DEFAULT_GROUP
+        file-extension: yaml
+        namespace: 2807b372-2965-4f41-80bb-3f73f6908f2a

@@ -1,8 +1,8 @@
 package com.rjavey.production.biz;
 
-import com.rjavey.common.model.command.AddProduct;
-import com.rjavey.common.model.command.AddProductRelation;
-import com.rjavey.common.model.command.UpdateProduct;
+import com.rjavey.common.model.command.production.AddProduct;
+import com.rjavey.common.model.command.production.AddProductRelation;
+import com.rjavey.common.model.command.production.UpdateProduct;
 import com.rjavey.common.model.query.production.ProductQuery;
 import com.rjavey.common.model.vo.production.ProductDetailVo;
 import com.rjavey.common.model.vo.production.ProductVo;

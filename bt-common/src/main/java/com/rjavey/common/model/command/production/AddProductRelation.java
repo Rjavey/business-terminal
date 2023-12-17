@@ -1,4 +1,4 @@
-package com.rjavey.common.model.command;
+package com.rjavey.common.model.command.production;
 
 
 import lombok.Data;

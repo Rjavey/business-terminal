@@ -16,6 +16,8 @@
         <module>bt-common</module>
         <module>bt-production</module>
         <module>bt-api</module>
+        <module>bt-gateway</module>
+        <module>bt-user</module>
     </modules>
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>

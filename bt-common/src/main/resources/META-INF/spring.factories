@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.rjavey.common.config.InterceptorConfig,\
+    com.rjavey.common.config.SnowflakeWorkerConfig

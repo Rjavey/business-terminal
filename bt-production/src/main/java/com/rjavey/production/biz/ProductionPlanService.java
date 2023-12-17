@@ -1,6 +1,6 @@
 package com.rjavey.production.biz;
 
-import com.rjavey.common.model.command.AddProductionPlan;
+import com.rjavey.common.model.command.production.AddProductionPlan;
 import com.rjavey.common.model.query.production.ProductionPlanQuery;
 import com.rjavey.common.result.PageResult;
 import com.rjavey.common.result.Result;

@@ -1,8 +1,8 @@
 package com.rjavey.production.controller;
 
-import com.rjavey.common.model.command.AddSupplier;
-import com.rjavey.common.model.command.DeleteIds;
-import com.rjavey.common.model.command.UpdateSupplier;
+import com.rjavey.common.model.command.production.AddSupplier;
+import com.rjavey.common.model.command.production.DeleteIds;
+import com.rjavey.common.model.command.production.UpdateSupplier;
 import com.rjavey.common.model.query.production.SupplierQuery;
 import com.rjavey.common.model.vo.production.SupplierDetailVo;
 import com.rjavey.common.model.vo.production.SupplierVo;
