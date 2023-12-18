@@ -5,6 +5,10 @@ spring:
       driverClassName: com.mysql.cj.jdbc.Driver
       username: root
       password: 1qazWSX
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 10.8.0.1:20501
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
