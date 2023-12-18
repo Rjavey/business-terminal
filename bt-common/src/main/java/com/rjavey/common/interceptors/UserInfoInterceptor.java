@@ -1,8 +1,10 @@
 package com.rjavey.common.interceptors;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.rjavey.common.enums.Header;
-import com.rjavey.common.utils.UserContext;
+import com.rjavey.common.model.dto.IdentityDTO;
+import com.rjavey.common.utils.ThreadIdentityUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,13 +21,14 @@ public class UserInfoInterceptor implements HandlerInterceptor {
         // 获取用户信息
         String userInfo = request.getHeader(Header.UserInfo.getCode());
         if (StrUtil.isNotBlank(userInfo)) {
-            UserContext.setUser(Long.valueOf(userInfo));
+            IdentityDTO identity = JSONUtil.toBean(userInfo,IdentityDTO.class);
+            ThreadIdentityUtil.set(identity);
         }
         return true;
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        UserContext.remove();
+        ThreadIdentityUtil.remove();
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author: Rjavey
  * @create: 2023-12-17 22:41:59
@@ -17,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @PostMapping("/")
-    public Result login(LoginCommand command) {
+    public Result login(LoginCommand command, HttpServletResponse response) {
         LoginService loginService = LoginStrategyRegistry.getStrategy(command.getLoginType());
         if (loginService == null) {
             throw new IllegalArgumentException("Invalid login type: " + command.getLoginType());
         }
-        return loginService.login(command);
+        return loginService.login(command, response);
     }
 
 }

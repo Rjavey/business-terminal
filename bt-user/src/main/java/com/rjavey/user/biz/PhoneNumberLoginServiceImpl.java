@@ -1,9 +1,12 @@
 package com.rjavey.user.biz;
 
 import com.rjavey.common.model.command.user.LoginCommand;
+import com.rjavey.common.model.vo.user.UserLoginInfoVO;
 import com.rjavey.common.result.Result;
 import com.rjavey.user.enums.LoginType;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author: Rjavey
@@ -17,7 +20,7 @@ public class PhoneNumberLoginServiceImpl implements LoginService {
     }
 
     @Override
-    public Result login(LoginCommand loginCommand) {
+    public Result<UserLoginInfoVO> login(LoginCommand loginCommand, HttpServletResponse response) {
         return null;
     }
 

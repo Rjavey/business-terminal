@@ -1,7 +1,10 @@
 package com.rjavey.user.biz;
 
 import com.rjavey.common.model.command.user.LoginCommand;
+import com.rjavey.common.model.vo.user.UserLoginInfoVO;
 import com.rjavey.common.result.Result;
+
+import javax.servlet.http.HttpServletResponse;
 
 public interface LoginService {
 
@@ -11,6 +14,6 @@ public interface LoginService {
      * @param loginCommand
      * @return
      */
-    Result login(LoginCommand loginCommand);
+    Result<UserLoginInfoVO> login(LoginCommand loginCommand, HttpServletResponse response);
 
 }

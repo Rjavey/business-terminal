@@ -39,7 +39,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
 
         // jwt 解析 todo
-        //  userInfo = userId
+        //  userInfo = IdentityDTO json
         String userInfo = new String();
         exchange.mutate().request(builder -> builder.header(Header.UserInfo.getCode(), userInfo)).build();
 
