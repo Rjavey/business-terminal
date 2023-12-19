@@ -27,7 +27,7 @@ public class User extends BaseEntity implements Serializable {
     /**
      * 手机号
      */
-    private String phone;
+    private String phoneNumber;
 
     /**
      * 昵称

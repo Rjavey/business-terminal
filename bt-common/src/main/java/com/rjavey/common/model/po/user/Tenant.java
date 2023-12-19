@@ -20,5 +20,7 @@ public class Tenant extends BaseEntity implements Serializable {
      */
     private String tenantName;
 
+    private String tenantUsername;
+
     private static final long serialVersionUID = 1L;
 }

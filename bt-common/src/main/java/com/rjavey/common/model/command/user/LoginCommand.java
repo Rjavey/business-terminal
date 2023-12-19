@@ -1,5 +1,6 @@
 package com.rjavey.common.model.command.user;
 
+import com.rjavey.common.annotation.ApiPropertyReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,6 +16,9 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @ApiModel("用户登录参数")
 public class LoginCommand {
+
+    @ApiModelProperty("租户账号")
+    private String tenantAccount;
 
     @NotEmpty(message = "登录方式参数错误")
     @ApiModelProperty("登录方式")
