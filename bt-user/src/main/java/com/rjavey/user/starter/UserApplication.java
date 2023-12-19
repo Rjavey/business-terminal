@@ -16,6 +16,6 @@ public class UserApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class, args);
-        log.info("gateway服务启动");
+        log.info("User服务启动");
     }
 }

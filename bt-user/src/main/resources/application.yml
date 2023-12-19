@@ -1,0 +1,20 @@
+spring:
+  dataSource:
+    druid:
+      url: jdbc:mysql://10.8.0.1:21306/business_terminal_user?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true&useSSL=false
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 1qazWSX
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 10.8.0.1:20501
+        port: 20502
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+
+bt:
+  snowflake:
+    dataId: 1
+    workerId: 1
