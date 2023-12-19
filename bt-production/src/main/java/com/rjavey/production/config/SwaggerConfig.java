@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -34,7 +35,6 @@ import java.util.List;
 @ConfigurationProperties(prefix = "swagger.config")
 @Setter
 @Getter
-
 public class SwaggerConfig {
 
     /** 分组名称 */
@@ -65,7 +65,7 @@ public class SwaggerConfig {
                 .groupName(this.groupName)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(this.basePackage))
+                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
                 .build()
                 .directModelSubstitute(LocalDateTime.class, Date.class)

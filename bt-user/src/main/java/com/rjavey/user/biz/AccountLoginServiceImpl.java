@@ -49,6 +49,7 @@ public class AccountLoginServiceImpl implements LoginService {
 
         response.addHeader(Header.AUTHORIZATION.getValue(),token);
         Cookie cookie = new Cookie(CookieConstant.REFRESH_TOKEN,refreshToken);
+        cookie.setHttpOnly(true);
         response.addCookie(cookie);
 
         // 封装登录信息

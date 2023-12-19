@@ -56,10 +56,9 @@ public class SupplierBizImpl implements SupplierBizService {
     @Override
     public PageResult<SupplierVo> page(SupplierQuery query){
 
-        // todo 获取用户租户id
-//        var tenantId = 1L;
         LambdaQueryWrapper<Supplier> queryWrapper = new LambdaQueryWrapper<Supplier>()
-                //                .eq(Supplier::getTenantId,1L)
+//                                .eq(Supplier::getTenantId,ThreadIdentityUtil.get().getTenantId())
+                                .eq(Supplier::getTenantId,1L)
                 .eq(StringUtil.isNotBlank(query.getStatus()),Supplier::getStatus,query.getStatus())
                 .eq(query.getProvince() != null,Supplier::getProvince,query.getProvince())
                 .eq(query.getCity() != null,Supplier::getCity,query.getCity())
