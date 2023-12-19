@@ -61,20 +61,31 @@ public class AccountLoginServiceImpl implements LoginService {
         }
 
         Tenant tenant = tenantService.getOne(new LambdaQueryWrapper<Tenant>().eq(Tenant::getTenantUsername,command.getTenantAccount()));
-        // todo 查询租户信息
+        if (tenant == null) {
+            throw new UnauthorizedException("主账号信息错误");
+        }
+        // 查询租户信息
         TenantUser tenantUser = tenantUserService.getOne(new LambdaQueryWrapper<TenantUser>()
                 .eq(TenantUser::getTenantId,tenant.getId())
                 .eq(TenantUser::getUserId,user.getId()));
-
+        if (tenantUser == null) {
+            throw new UnauthorizedException("主账号信息错误");
+        }
 
         // 创建jwt
         IdentityDTO identity = new IdentityDTO();
-        byte[] key = new byte[1];
+        identity.setId(user.getId());
+        identity.setTenantId(tenant.getId());
+        identity.setExpireTime(System.currentTimeMillis() + 4 * 3600 * 1000);
+
+        // todo temp parse key
+        byte[] key = "abck".getBytes();
         String token = JWTUtil.createToken(BeanUtil.beanToMap(identity),key);
         String refreshToken = JWTUtil.createToken(BeanUtil.beanToMap(identity),key);
 
-        // token放入redis
+        // todo redis 存入
 
+        // token放入redis
         response.addHeader(Header.AUTHORIZATION.getValue(),token);
         Cookie cookie = new Cookie(CookieConstant.REFRESH_TOKEN,refreshToken);
         cookie.setHttpOnly(true);
@@ -82,6 +93,10 @@ public class AccountLoginServiceImpl implements LoginService {
 
         // 封装登录信息
         UserLoginInfoVO info = new UserLoginInfoVO();
+        BeanUtil.copyProperties(user, info);
+        info.setBName(tenant.getTenantName());
+//        info.setBAvatar(tenant.ge);
+
 
         // 查询权限信息
 

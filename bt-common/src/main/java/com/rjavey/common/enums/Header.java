@@ -9,7 +9,9 @@ import lombok.Getter;
 @Getter
 public enum Header {
 
-    UserInfo("user-info", "登录后用户信息请求头");
+    UserInfo("user-info", "登录后用户信息请求头"),
+    TraceId("TraceId", "链接id"),
+    ;
 
     private String code;
     private String desc;

@@ -1,6 +1,10 @@
 package com.rjavey.gateway.filters;
 
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.jwt.JWT;
+import cn.hutool.jwt.JWTUtil;
 import com.rjavey.common.enums.Header;
+import com.rjavey.common.utils.SnowflakeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHeaders;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -37,12 +41,22 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             token = headers.get(0);
         }
 
+        if (StrUtil.isBlank(token)) {
+            // todo throw exception
+        }
+
+        // todo redis check token
 
         // jwt 解析 todo
-        //  userInfo = IdentityDTO json
-        String userInfo = new String();
-        exchange.mutate().request(builder -> builder.header(Header.UserInfo.getCode(), userInfo)).build();
-
+        if (!JWTUtil.verify(token, "abck".getBytes())) {
+            // todo throw exception
+        }
+        JWT jwt = JWTUtil.parseToken(token);
+        String userInfo = jwt.getPayloads().toString();
+        exchange.mutate().request(builder -> {
+            builder.header(Header.UserInfo.getCode(), userInfo);
+            builder.header(Header.TraceId.getCode(), SnowflakeUtil.getInstance().nextIdStr());
+        }).build();
 
         return chain.filter(exchange);
     }

@@ -20,6 +20,10 @@ public class IdentityDTO {
      */
     private Long tenantId;
 
-//    private Long timestamp;
+    /**
+     * 过期时间
+     */
+    private Long expireTime;
+
 
 }
