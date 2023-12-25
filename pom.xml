@@ -15,6 +15,7 @@
     <modules>
         <module>bt-common</module>
         <module>bt-production</module>
+        <module>bt-supplier</module>
         <module>bt-api</module>
         <module>bt-gateway</module>
         <module>bt-user</module>

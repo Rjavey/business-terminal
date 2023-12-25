@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rjavey.production.dao.SupplierMapper">
+
+    <resultMap id="BaseResultMap" type="com.rjavey.common.model.po.production.Supplier">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="code" column="code" jdbcType="VARCHAR"/>
+        <result property="tenantId" column="tenant_id" jdbcType="BIGINT"/>
+        <result property="supplierName" column="supplier_name" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="tradeId" column="trade_id" jdbcType="BIGINT"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="contactNumber" column="contact_number" jdbcType="VARCHAR"/>
+        <result property="contactName" column="contanct_name" jdbcType="VARCHAR"/>
+        <result property="province" column="province" jdbcType="BIGINT"/>
+        <result property="city" column="city" jdbcType="BIGINT"/>
+        <result property="area" column="area" jdbcType="BIGINT"/>
+        <result property="createAt" column="create_at" jdbcType="BIGINT"/>
+        <result property="updateAt" column="update_at" jdbcType="BIGINT"/>
+        <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+        <result property="gmtUpdate" column="gmt_update" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,code,tenant_id,
+        supplier_name,status,trade_id,
+        address,contact_number,contanct_name,
+        province,city,area,
+        create_at,update_at,gmt_create,
+        gmt_update
+    </sql>
+</mapper>
