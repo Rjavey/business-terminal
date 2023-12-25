@@ -1,6 +1,7 @@
-package com.rjavey.supplier.config;
+package com.rjavey.production.config;
 
 import io.swagger.models.auth.In;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -23,6 +24,7 @@ import java.time.LocalTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * swagger配置
@@ -33,8 +35,8 @@ import java.util.List;
 @Configuration
 @ConditionalOnProperty(name = "swagger.config.enable", havingValue = "true")
 @ConfigurationProperties(prefix = "swagger.config")
-@Setter
-@Getter
+@Data
+@RefreshScope
 public class SwaggerConfig {
 
     /** 分组名称 */
@@ -65,7 +67,7 @@ public class SwaggerConfig {
                 .groupName(this.groupName)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+                .apis(RequestHandlerSelectors.basePackage(this.basePackage))
                 .paths(PathSelectors.any())
                 .build()
                 .directModelSubstitute(LocalDateTime.class, Date.class)

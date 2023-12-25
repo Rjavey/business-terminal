@@ -1,4 +1,4 @@
-package com.rjavey.supplier.config;
+package com.rjavey.production.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;

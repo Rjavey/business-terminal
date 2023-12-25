@@ -1,4 +1,4 @@
-package com.rjavey.supplier.service;
+package com.rjavey.production.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;

@@ -1,6 +1,7 @@
 package com.rjavey.supplier.config;
 
 import io.swagger.models.auth.In;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -33,8 +34,8 @@ import java.util.List;
 @Configuration
 @ConditionalOnProperty(name = "swagger.config.enable", havingValue = "true")
 @ConfigurationProperties(prefix = "swagger.config")
-@Setter
-@Getter
+@Data
+@RefreshScope
 public class SwaggerConfig {
 
     /**

@@ -1,4 +1,4 @@
-package com.rjavey.supplier.controller;
+package com.rjavey.production.controller;
 
 import com.rjavey.common.model.command.production.AddProduct;
 import com.rjavey.common.model.command.production.AddProductRelation;
@@ -9,7 +9,7 @@ import com.rjavey.common.model.vo.production.ProductDetailVo;
 import com.rjavey.common.model.vo.production.ProductVo;
 import com.rjavey.common.result.PageResult;
 import com.rjavey.common.result.Result;
-import com.rjavey.supplier.biz.ProductBizService;
+import com.rjavey.production.biz.ProductBizService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;

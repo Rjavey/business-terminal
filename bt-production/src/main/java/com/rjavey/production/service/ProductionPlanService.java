@@ -1,7 +1,9 @@
-package com.rjavey.supplier.service;
+package com.rjavey.production.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.rjavey.common.model.command.production.AddProductionPlan;
 import com.rjavey.common.model.po.production.ProductionPlan;
+import com.rjavey.common.result.Result;
 
 /**
  * @author rjavey
@@ -9,5 +11,7 @@ import com.rjavey.common.model.po.production.ProductionPlan;
  * @createDate 2023-10-10 22:16:26
  */
 public interface ProductionPlanService extends IService<ProductionPlan> {
+
+
 
 }

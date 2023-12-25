@@ -1,4 +1,4 @@
-package com.rjavey.supplier.biz;
+package com.rjavey.production.biz;
 
 import com.rjavey.common.model.command.production.AddProductionPlan;
 import com.rjavey.common.model.query.production.ProductionPlanQuery;
@@ -8,7 +8,7 @@ import com.rjavey.common.result.Result;
 /**
  * @author rjavey
  */
-public interface ProductionPlanService {
+public interface ProductionPlanBizService {
 
     /**
      * 创建生产计划

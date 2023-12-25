@@ -1,9 +1,9 @@
 package com.rjavey.common.enums.user;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.rjavey.common.model.po.BaseEntity;
 import lombok.Data;
 
 /**

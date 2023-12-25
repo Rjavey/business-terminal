@@ -1,4 +1,4 @@
-package com.rjavey.supplier.dao;
+package com.rjavey.production.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.rjavey.common.model.po.production.Product;

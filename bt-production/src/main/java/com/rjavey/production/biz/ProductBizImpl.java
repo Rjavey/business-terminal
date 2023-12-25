@@ -1,4 +1,4 @@
-package com.rjavey.supplier.biz;
+package com.rjavey.production.biz;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -20,8 +20,8 @@ import com.rjavey.common.result.Result;
 import com.rjavey.common.utils.CollectionUtils;
 import com.rjavey.common.utils.SnowflakeUtil;
 import com.rjavey.common.utils.ThreadIdentityUtil;
-import com.rjavey.supplier.service.ProductRelationService;
-import com.rjavey.supplier.service.ProductService;
+import com.rjavey.production.service.ProductRelationService;
+import com.rjavey.production.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -94,7 +94,7 @@ public class ProductBizImpl implements ProductBizService{
     public Result<ProductVo> edit(UpdateProduct data) {
         Product product = getTenantProduct(data.getId());
         if (product == null) {
-            return Result.error("");
+            return Result.error("产品数据不存在或已删除");
         }
         BeanUtil.copyProperties(data, product);
         productService.updateById(product);
@@ -143,8 +143,7 @@ public class ProductBizImpl implements ProductBizService{
             productRelationService.save(BeanUtil.copyProperties(relation, ProductRelation.class));
             return Result.ok();
         }
-
-        return Result.error("");
+        return Result.error("设置失败");
     }
 
     @Override
@@ -157,12 +156,12 @@ public class ProductBizImpl implements ProductBizService{
                     .eq(ProductRelation::getChildId, relation.getChildId()));
             return Result.ok();
         }
-        return Result.error("");
+        return Result.error("删除失败");
     }
 
     private Product getTenantProduct(Long productId) {
         return productService.getOne(new LambdaQueryWrapper<Product>()
-//                .eq(Product::getTenantId, ThreadIdentityUtil.get().getTenantId())
+                .eq(Product::getTenantId, ThreadIdentityUtil.get().getTenantId())
                 .eq(Product::getTenantId, 1L)
                 .eq(Product::getId, productId));
     }

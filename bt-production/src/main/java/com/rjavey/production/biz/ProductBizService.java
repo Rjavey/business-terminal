@@ -1,4 +1,4 @@
-package com.rjavey.supplier.biz;
+package com.rjavey.production.biz;
 
 import com.rjavey.common.model.command.production.AddProduct;
 import com.rjavey.common.model.command.production.AddProductRelation;

@@ -1,9 +1,9 @@
-package com.rjavey.supplier.service.impl;
+package com.rjavey.production.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rjavey.common.model.po.production.ProductRelation;
-import com.rjavey.supplier.dao.ProductRelationMapper;
-import com.rjavey.supplier.service.ProductRelationService;
+import com.rjavey.production.dao.ProductRelationMapper;
+import com.rjavey.production.service.ProductRelationService;
 import org.springframework.stereotype.Service;
 
 /**

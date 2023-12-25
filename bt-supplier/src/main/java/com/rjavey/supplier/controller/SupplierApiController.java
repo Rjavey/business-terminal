@@ -31,7 +31,7 @@ public class SupplierApiController {
     }
 
     @ApiOperation("保存供应商产品配置")
-    @PostMapping("/supplier-product/save")
+    @PostMapping("/supplier_product/save")
     public void saveSupplierProduct(@RequestBody List<SupplierProduct> supplierProduct) {
         supplierProductService.saveBatch(supplierProduct);
     }
