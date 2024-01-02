@@ -1,0 +1,12 @@
+seata:
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 10.8.0.1:8848
+      namespace: "900930bf-a1c9-4d4b-8b98-fd40d9e05197"
+      group: DEFAULT_GROUP
+      application: seata-server
+  tx-service-group: bt
+  service:
+    vgroup-mapping:
+      bt: "default"

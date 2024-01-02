@@ -1,11 +1,11 @@
 package com.rjavey.common.config;
 
 import cn.hutool.core.util.ReflectUtil;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.fasterxml.jackson.databind.introspect.AnnotatedField;
 import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
 import com.rjavey.common.annotation.ApiPropertyReference;
 import com.rjavey.common.annotation.SwaggerDisplayEnum;
+import io.micrometer.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.AnnotationUtils;

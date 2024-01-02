@@ -1,0 +1,8 @@
+swagger:
+  config:
+    enable: true
+    groupName: "production"
+    basePackage: "com.rjavey.production.controller"
+    title: "产品管理"
+    description: "产品管理"
+    version: "1.0.0"
