@@ -2,7 +2,7 @@ package com.rjavey.common.model.command.production;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**

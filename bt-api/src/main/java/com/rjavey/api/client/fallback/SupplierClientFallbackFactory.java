@@ -3,8 +3,9 @@ package com.rjavey.api.client.fallback;
 import com.rjavey.api.client.SupplierClient;
 import com.rjavey.common.model.po.production.Supplier;
 import com.rjavey.common.model.po.production.SupplierProduct;
-import feign.hystrix.FallbackFactory;
+//import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.openfeign.FallbackFactory;
 
 import java.util.Collections;
 import java.util.List;
