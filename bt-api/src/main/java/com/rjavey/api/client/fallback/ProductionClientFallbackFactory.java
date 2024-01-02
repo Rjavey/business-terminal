@@ -1,7 +1,8 @@
 package com.rjavey.api.client.fallback;
 
 import com.rjavey.api.client.ProductionClient;
-import feign.hystrix.FallbackFactory;
+import org.springframework.cloud.openfeign.FallbackFactory;
+//import feign.hystrix.FallbackFactory;
 
 /**
  * @author: Rjavey

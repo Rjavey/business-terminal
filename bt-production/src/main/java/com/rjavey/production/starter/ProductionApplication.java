@@ -5,14 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.cloud.client.SpringCloudApplication;
+//import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author rjavey
  */
-@SpringCloudApplication
+//@SpringCloudApplication
 @EnableAutoConfiguration
 @EnableFeignClients(basePackages = "com.rjavey.api.client",defaultConfiguration = DefaultFeignConfig.class)
 @ComponentScan(value = "com.rjavey.production")

@@ -5,10 +5,11 @@ import cn.hutool.json.JSONUtil;
 import com.rjavey.common.enums.Header;
 import com.rjavey.common.model.dto.IdentityDTO;
 import com.rjavey.common.utils.ThreadIdentityUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * @author: Rjavey

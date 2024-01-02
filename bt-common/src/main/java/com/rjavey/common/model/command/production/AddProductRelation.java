@@ -3,7 +3,7 @@ package com.rjavey.common.model.command.production;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * 产品关系
