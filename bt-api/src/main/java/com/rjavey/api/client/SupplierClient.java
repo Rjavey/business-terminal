@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(value = "supplier-service", fallbackFactory = SupplierClientFallbackFactory.class)
+@FeignClient(value = "bt-supplier", fallbackFactory = SupplierClientFallbackFactory.class)
 public interface SupplierClient {
 
     @GetMapping("/product/{productId}")
     List<Supplier> getSupplierByProduct(@PathVariable Long productId);
 
 
-    @PostMapping("/supplier-product/save")
+    @PostMapping("/api/supplier/supplier_product/save")
     void saveSupplierProduct(@RequestBody List<SupplierProduct> supplierProduct);
 }

@@ -7,6 +7,7 @@ import com.rjavey.supplier.service.SupplierService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +33,9 @@ public class SupplierApiController {
 
     @ApiOperation("保存供应商产品配置")
     @PostMapping("/supplier_product/save")
+    @Transactional
     public void saveSupplierProduct(@RequestBody List<SupplierProduct> supplierProduct) {
         supplierProductService.saveBatch(supplierProduct);
+        int i = 1 / 0;
     }
 }

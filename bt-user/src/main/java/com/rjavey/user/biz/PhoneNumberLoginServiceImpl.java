@@ -4,13 +4,12 @@ import com.rjavey.common.model.command.user.LoginCommand;
 import com.rjavey.common.model.vo.user.UserLoginInfoVO;
 import com.rjavey.common.result.Result;
 import com.rjavey.user.enums.LoginType;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author: Rjavey

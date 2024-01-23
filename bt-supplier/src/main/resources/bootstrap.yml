@@ -14,6 +14,7 @@ spring:
         file-extension: yaml
         shared-configs:
           - dataId: supplier-swagger.yaml
+          - dataId: shared-seata.yaml
       discovery:
         server-addr: ${nacos-server-addr}
         group: DEFAULT_GROUP

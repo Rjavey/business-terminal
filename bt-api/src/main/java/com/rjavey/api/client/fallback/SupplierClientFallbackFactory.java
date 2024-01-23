@@ -3,7 +3,6 @@ package com.rjavey.api.client.fallback;
 import com.rjavey.api.client.SupplierClient;
 import com.rjavey.common.model.po.production.Supplier;
 import com.rjavey.common.model.po.production.SupplierProduct;
-//import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
@@ -27,6 +26,7 @@ public class SupplierClientFallbackFactory implements FallbackFactory<SupplierCl
             @Override
             public void saveSupplierProduct(List<SupplierProduct> supplierProduct) {
                 log.error("保存供应商可提供产品配置错误：{}", throwable.getMessage(), throwable);
+                throw new RuntimeException();
             }
         };
     }

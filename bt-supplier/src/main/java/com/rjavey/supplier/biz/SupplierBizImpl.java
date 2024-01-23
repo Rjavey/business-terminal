@@ -2,6 +2,7 @@ package com.rjavey.supplier.biz;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.rjavey.api.client.ProductionClient;
 import com.rjavey.common.exception.ServiceException;
 import com.rjavey.common.model.command.production.AddSupplier;
 import com.rjavey.common.model.command.production.UpdateSupplier;
@@ -16,12 +17,11 @@ import com.rjavey.common.result.Result;
 import com.rjavey.common.utils.SnowflakeUtil;
 import com.rjavey.common.utils.StringUtil;
 import com.rjavey.common.utils.ThreadIdentityUtil;
-import com.rjavey.supplier.service.ProductService;
 import com.rjavey.supplier.service.SupplierService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,13 +29,12 @@ import java.util.List;
  * @author rjavey
  */
 @Service
+@AllArgsConstructor
 public class SupplierBizImpl implements SupplierBizService {
 
-    @Resource
-    private SupplierService supplierService;
+    private final SupplierService supplierService;
+    private final ProductionClient productionClient;
 
-    @Resource
-    private ProductService productService;
 
     @Override
     public Result<SupplierVo> add(AddSupplier addSupplier) {
@@ -107,7 +106,7 @@ public class SupplierBizImpl implements SupplierBizService {
         }
 
         SupplierDetailVo detail = BeanUtil.copyProperties(supplier,SupplierDetailVo.class);
-        List<Product> products = productService.productDetailBySupplier(supplierId);
+        List<Product> products = productionClient.productDetailBySupplier(supplierId);
         detail.setProducts(BeanUtil.copyToList(products, ProductVo.class));
 
         return Result.success(detail);

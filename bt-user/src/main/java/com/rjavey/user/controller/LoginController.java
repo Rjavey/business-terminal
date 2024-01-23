@@ -4,11 +4,10 @@ import com.rjavey.common.model.command.user.LoginCommand;
 import com.rjavey.common.result.Result;
 import com.rjavey.user.biz.LoginService;
 import com.rjavey.user.biz.LoginStrategyRegistry;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author: Rjavey

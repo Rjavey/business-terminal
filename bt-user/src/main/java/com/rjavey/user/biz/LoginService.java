@@ -3,8 +3,7 @@ package com.rjavey.user.biz;
 import com.rjavey.common.model.command.user.LoginCommand;
 import com.rjavey.common.model.vo.user.UserLoginInfoVO;
 import com.rjavey.common.result.Result;
-
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 public interface LoginService {
 

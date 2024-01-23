@@ -19,14 +19,14 @@ import com.rjavey.user.enums.LoginType;
 import com.rjavey.user.service.TenantService;
 import com.rjavey.user.service.TenantUserService;
 import com.rjavey.user.service.UserService;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 /**
