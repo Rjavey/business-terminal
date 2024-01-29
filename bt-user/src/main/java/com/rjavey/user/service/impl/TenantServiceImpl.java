@@ -1,8 +1,9 @@
-package com.rjavey.user.service;
+package com.rjavey.user.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rjavey.common.model.po.user.Tenant;
 import com.rjavey.user.dao.TenantMapper;
+import com.rjavey.user.service.TenantService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 */
 @Service
 public class TenantServiceImpl extends ServiceImpl<TenantMapper, Tenant>
-    implements TenantService{
+        implements TenantService {
 
 }
 

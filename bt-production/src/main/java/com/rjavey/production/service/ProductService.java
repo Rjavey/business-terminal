@@ -20,8 +20,19 @@ public interface ProductService extends IService<Product> {
      */
     List<Product> productDetailBySupplier(Long supplierId);
 
+    /**
+     * 查询上级物料
+     *
+     * @param productId
+     * @return
+     */
     List<Product> getParentProduct(Long productId);
 
+    /**
+     * 查询下级物料
+     * @param productId
+     * @return
+     */
     List<Product> getChildProduct(Long productId);
 
 
