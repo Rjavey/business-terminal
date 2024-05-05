@@ -5,14 +5,11 @@ import com.rjavey.common.model.command.production.AddProduct;
 import com.rjavey.common.model.command.production.AddProductRelation;
 import com.rjavey.common.model.command.production.DeleteIds;
 import com.rjavey.common.model.command.production.UpdateProduct;
-import com.rjavey.common.model.po.production.Product;
-import com.rjavey.common.model.po.production.SupplierProduct;
 import com.rjavey.common.model.query.production.ProductQuery;
 import com.rjavey.common.model.vo.production.ProductDetailVo;
 import com.rjavey.common.model.vo.production.ProductVo;
 import com.rjavey.common.result.PageResult;
 import com.rjavey.common.result.Result;
-import com.rjavey.common.utils.SnowflakeUtil;
 import com.rjavey.production.biz.ProductBizService;
 import com.rjavey.production.service.ProductService;
 import io.seata.spring.annotation.GlobalTransactional;
@@ -21,8 +18,6 @@ import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
 
 /**
  * @author rjavey
@@ -83,18 +78,7 @@ public class ProductController {
     @PostMapping("/test_seata")
     public Result<?> testSeata() {
 
-        Product product = new Product();
-        product.setId(SnowflakeUtil.nextId());
-        product.setProductName("123123");
-        product.setProductType("finished");
-        productService.save(product);
-
-        SupplierProduct sp = new SupplierProduct();
-        sp.setId(SnowflakeUtil.nextId());
-        sp.setProductId(product.getId());
-        sp.setSupplierId(SnowflakeUtil.nextId());
-        supplierClient.saveSupplierProduct(Arrays.asList(sp));
-        return null;
+        return Result.ok("123");
     }
 
 }

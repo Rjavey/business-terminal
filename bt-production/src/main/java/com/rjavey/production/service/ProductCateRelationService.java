@@ -11,4 +11,5 @@ import com.rjavey.common.model.po.production.ProductCateRelation;
  */
 public interface ProductCateRelationService extends IService<ProductCateRelation> {
 
+
 }

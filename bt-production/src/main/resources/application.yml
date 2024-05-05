@@ -10,6 +10,17 @@ spring:
       transport:
         dashboard: 10.8.0.1:20501
         port: 20502
+      datasource:
+        ds:
+          nacos:
+            server-addr: ${nacos-server-addr}
+            namespace: 900930bf-a1c9-4d4b-8b98-fd40d9e05197
+            data-id: production-sentinel.json
+            group-id: DEFAULT_GROUP
+            rule-type: flow
+            data-type: json
+      eager: true
+
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml

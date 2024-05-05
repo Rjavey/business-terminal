@@ -42,6 +42,7 @@
         <minio.version>8.2.1</minio.version>
         <bootstrap.version>4.0.0</bootstrap.version>
         <jakarta.mail.version>2.0.1</jakarta.mail.version>
+        <rocketmq-springboot-version>2.3.0</rocketmq-springboot-version>
     </properties>
 
     <dependencyManagement>
